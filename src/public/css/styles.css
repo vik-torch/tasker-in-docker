@@ -1,0 +1,10 @@
+body {
+    background-color: #f5f5f5;
+    padding: 20px;
+    font-size: 4rem;
+}
+
+.task-change {
+    display: flex;
+    justify-content: right;
+}

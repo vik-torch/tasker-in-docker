@@ -1,0 +1,19 @@
+{
+    "name": "vik-torch/tasker-panel",
+    "type": "project",
+    "authors": [
+        {
+            "name": "vik-torch",
+            "email": "chaikinviktor2018@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/",
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
