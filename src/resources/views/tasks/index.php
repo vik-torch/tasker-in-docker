@@ -82,10 +82,10 @@ use Core\View\View;
 
                         <div class="ml-auto">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input status" id="task_status" data-val="" disabled>
+                                <input type="checkbox" class="form-check-input status" id="task_status" disabled>
                                 <label class="form-check-label" for="exampleCheck1">Статус задачи</label>
                             </div>
-                            <a class="task-change d-none" href="javascript:void(0);">
+                            <a class="task-change change_btn d-none" href="javascript:void(0);">
                                 <i class="bi bi-pencil"></i>
                             </a>
                         </div>
@@ -94,10 +94,11 @@ use Core\View\View;
                     <div class="card-body">
                         <div class="mb-0">
                             <p class="text">Текст</p>
+                            <input type="text" class="form-control text_moderate d-none">
                         </div>
                     </div>
                     <div class="card-footer d-none">
-                        <a class="ml-auto" href="javascript:void(0);">Сохранить</a>
+                        <a class="save_moderate_btn ml-auto" href="javascript:void(0);">Сохранить</a>
                     </div>
                 </div>
             </div>

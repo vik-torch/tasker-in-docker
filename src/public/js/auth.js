@@ -30,13 +30,12 @@ class AuthPage
             'contentType': false,
             'processData': false,
             'success': this.handleAuthResponse.bind(this),
-            'error': (data) => alert('Не удалось выполнить операцию.')
+            'error': () => alert('Не удалось выполнить операцию.')
         }, "json");
     }
 
     handleAuthResponse(data)
     {
-        // data = JSON.parse(data);
         if(data.status == 200) {
             this.buildTasks(data.data);
         } else if (data.status == 300) {
@@ -65,4 +64,23 @@ class AuthForm
     }
 }
 
-$(() => auth_page = new AuthPage())
+class User
+{
+    isAuth()
+    {
+        let auth_id = this.getCookie('auth_id');
+        return auth_id !== undefined;
+    }
+
+    getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      }
+}
+
+$(() => {
+    auth_page = new AuthPage();
+    user = new User();
+});

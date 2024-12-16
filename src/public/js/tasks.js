@@ -118,18 +118,22 @@ class Page
             return;
         }
 
-        task.text ?? formData.append('text', task.text);
-        task.status ??formData.append('status', task.status);
+        if (task.text) {
+            formData.append('text', task.text);
+        }
+        if (task.status) {
+            formData.append('status', task.status);
+        }
 
         $.post({
-            'url': '/tasks/update/',
+            'url': '/tasks/update',
             'headers': {'X-Requested-With': 'XMLHttpRequest'},
             'cache': false,
             'data': formData,
             'contentType': false,
             'processData': false,
             'success': this.update.bind(this),
-            'error': (data) => alert(`Не удалось удалить комментарий.`)
+            'error': (data) => alert('Не удалось обновить комментарий.')
         }, "json");
     }
 
@@ -178,22 +182,69 @@ class Tasks
 
         this.show();
 
-        $('#tasks_list .update_btn').one('click', this.updateTask.bind(this));
+        $('#tasks_list .change_btn').one('click', this.moderateTask.bind(this));
     }
 
-    updateTask(event)
+    moderateTask(event)
     {
-        let task_id = $(event.target).closest('.card').attr('data-card-id')
-        let text = $(event.target).closest('.card').find('.text').text();
-        let status = $(event.target).closest('.card').find('.status').text();
+        let $card = $(event.target).closest('.card');
+        let prev_task_data = this.getTaskData($card);
 
-        let task = {
-            id: task_id,
-            text: text,
-            status: status
+        $card.data('prev_data', prev_task_data);
+
+        $card.find('#task_status').removeAttr('disabled');
+        
+        $card.find('.text').addClass('d-none');
+        $card.find('.text_moderate').removeClass('d-none').val(prev_task_data.text);
+
+        $card.find('.card-footer').removeClass('d-none');
+        $card.find('.save_moderate_btn').one('click', this.saveModerateTask.bind(this));
+    }
+
+    moderateTaskHide(event)
+    {
+        let $card = $(event.target).closest('.card');
+
+        $card.removeAttr('data-prev_data');
+
+        $card.find('#task_status').prop('disabled', true);
+        
+        $card.find('.text').removeClass('d-none');
+        $card.find('.text_moderate').addClass('d-none').val('');
+
+        $card.find('.card-footer').addClass('d-none');
+
+        $(event.target).closest('.card').find('.change_btn').one('click', this.moderateTask.bind(this));
+    }
+
+    getTaskData($card)
+    {
+        let task_text = $card.find('.text').text();
+        let task_status = $card.find('.status').prop('checked') ? 'DONE' : 'NEW';
+
+        return {
+            text : task_text,
+            status : task_status
         };
+    }
 
-        $(document).trigger('update-task', task);
+    saveModerateTask(event)
+    {
+        let $card = $(event.target).closest('.card');
+        let data = $card.data('prev_data');
+
+        let moderate_text = $card.find('.text_moderate').val();
+        $card.find('.text').text(moderate_text);
+        let current_data = this.getTaskData($card);
+
+        let is_equal = (JSON.stringify(data) == JSON.stringify(current_data));
+        if (is_equal) {
+            this.moderateTaskHide(event);
+            return;
+        }
+
+        current_data.id = $card.data('card-id');
+        $(document).trigger('update-task', current_data);
     }
 
     getSortParams()
@@ -258,6 +309,10 @@ class Task
             case 'NEW':
                 this.$body.find('.status').removeAttr('checked');
                 break;
+        }
+
+        if (user.isAuth()) {
+            this.$body.find('.task-change').removeClass('d-none');
         }
     }
 }
