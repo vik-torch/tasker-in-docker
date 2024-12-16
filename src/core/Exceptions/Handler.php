@@ -8,10 +8,13 @@ class Handler
 {
     public static function handle(\Throwable $exception)
     {
-        if ($exception instanceof IServerException) {
-            http_response_code($exception->getCode());
-            return new ErrorResponse('', $exception->getCode(), 'Что-то пошло не так');
+        switch (true) {
+            case ($exception instanceof IServerException):
+            case ($exception instanceof \PDOException):
+                http_response_code(500);
+                return new ErrorResponse('', 500, 'Что-то пошло не так');
         }
+        
         return $exception;
     }
 }

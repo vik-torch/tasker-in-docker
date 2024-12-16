@@ -38,7 +38,7 @@ class Connector
                 $_ENV['DB_PASS'],
                 $options
             );
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new ServerException('Database connection error: ' . $e->getMessage());
         }
 

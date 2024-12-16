@@ -11,7 +11,10 @@
         "psr-4": {
             "Core\\": "core/",
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Migrations/tasker.sql"
+        ]
     },
     "require": {
         "vlucas/phpdotenv": "^5.6"

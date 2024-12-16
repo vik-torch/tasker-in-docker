@@ -20,7 +20,7 @@ use Core\View\View;
             <div class="form-group row">
                 <label for="login" class="col-sm-2 col-form-label">Логин</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="login" value="email@example.com">
+                    <input type="text" class="form-control" id="login" placeholder="email@example.com">
                 </div>
             </div>
             <div class="form-group row">

@@ -11,6 +11,7 @@ use App\Controllers\TestController;
 use App\Controllers\Task\GetController;
 use App\Controllers\Task\StoreController;
 use App\Controllers\Task\UpdateController;
+use App\Migrations\Migration;
 
 /**
  * Файл с добавлением роутов
@@ -38,3 +39,6 @@ $router->addRoute('POST', '/registration', RegistrationController::class, 'index
 $router->addRoute('GET', '/login', LoginController::class, 'index');
 $router->addRoute('GET', '/logout', LogoutController::class, 'index');
 $router->addRoute('POST', '/login/auth', AuthController::class, 'index');
+
+// Migration
+// $router->addRoute('GET', '/migration', Migration::class, 'index');
