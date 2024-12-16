@@ -9,6 +9,7 @@ class TaskDTO
         public string $text,
         public string $status,
         public string $user_name,
-        public string $user_email
+        public string $user_email,
+        public bool $is_edit
     ) {}
 }

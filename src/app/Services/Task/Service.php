@@ -76,7 +76,8 @@ class Service implements ITaskService
                 $raw_task['text'],
                 $raw_task['status'],
                 $raw_task['name'],
-                $raw_task['email']
+                $raw_task['email'],
+                $raw_task['is_edit']
             );
             $tasks[] = $task;
         };

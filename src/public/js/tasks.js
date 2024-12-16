@@ -61,12 +61,11 @@ class Page
 
     handleCreateTaskResponse(data)
     {
-        data = JSON.parse(data);
         if (data.status == 201) {
             this.showTasks.call(this);
             alert('Задача успешно добавлена!');
         } else {
-            alert('Не удалось создать задачу.');
+            alert('Не удалось создать задачу. Возможно, пользователь с таким email уже существует под другим именем.');
         }
     }
 
@@ -284,6 +283,7 @@ class Task
         this.status = data.status;
         this.user_name = data.user_name;
         this.email = data.user_email;
+        this.is_edit = data.is_edit;
         
         this.$body = $('#card_pattern .task-card').clone();
 
@@ -313,6 +313,10 @@ class Task
 
         if (user.isAuth()) {
             this.$body.find('.task-change').removeClass('d-none');
+        }
+
+        if (this.is_edit) {
+            this.$body.find('.is-edit').removeClass('d-none');
         }
     }
 }

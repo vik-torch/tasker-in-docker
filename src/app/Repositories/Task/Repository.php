@@ -38,6 +38,7 @@ class Repository extends MySQLRepository implements ITaskRepository
                 t.id,
                 t.text,
                 t.status,
+                t.is_edit,
                 u.name,
                 u.email
                 FROM `tasks` t
@@ -64,7 +65,7 @@ class Repository extends MySQLRepository implements ITaskRepository
     }
 
     public function update(int $id, string $text, ?TaskStatus $status) {
-        $query = 'UPDATE `tasks` SET %params% WHERE `id` = :id';
+        $query = 'UPDATE `tasks` SET %params%, `is_edit` = 1 WHERE `id` = :id';
 
         // TODO: будем считать, что такая запись есть
 

@@ -2,6 +2,9 @@
 
 namespace App\Controllers\Task;
 
+use Core\Response\ErrorResponse;
+use Core\Response\SuccessResponse;
+
 class StoreController extends BaseController
 {
     public function index()
@@ -10,12 +13,11 @@ class StoreController extends BaseController
         $user_name = $_POST['name'];
         $user_email = $_POST['email'];
 
-        $this->taskService->create($text, $user_name, $user_email);
-        
-        // return '{"status":"201","message":"Успешное сохранение!"}';
-        return json_encode([
-            'status' => '201',
-            'message' => 'Успешное сохранение!'
-        ]);
+        try {
+            $this->taskService->create($text, $user_name, $user_email);
+        } catch (\Exception $e) {
+            return new ErrorResponse('', 500, 'Что-то пошло не так');
+        }
+        return new SuccessResponse('Задача успешно создана!', 201);
     }
 }

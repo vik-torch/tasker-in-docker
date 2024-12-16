@@ -83,11 +83,14 @@ use Core\View\View;
                         <div class="ml-auto">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input status" id="task_status" disabled>
-                                <label class="form-check-label" for="exampleCheck1">Статус задачи</label>
+                                <label class="form-check-label" for="task_status">Статус задачи</label>
                             </div>
-                            <a class="task-change change_btn d-none" href="javascript:void(0);">
-                                <i class="bi bi-pencil"></i>
-                            </a>
+                            <div class="d-flex">
+                                <a class="task-change change_btn d-none" href="javascript:void(0);">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <label class="is-edit form-check-label d-none" for="task_status">(ред.)</label>
+                            </div>
                         </div>
                         
                     </div>
