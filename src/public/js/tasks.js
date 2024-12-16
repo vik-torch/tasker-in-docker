@@ -7,8 +7,17 @@ class Page
         this.$taskForm = $('#task_form');
         this.tasks = new Tasks();
 
+        if (!this.is_task_page()) {
+            return;
+        };
+
         this.init();
         this.bindEvents();
+    }
+
+    is_task_page()
+    {
+        return window.location.pathname == '/tasks';
     }
 
     bindEvents()
@@ -91,7 +100,7 @@ class Page
         if(data.status == 200) {
             this.buildTasks(data.data);
         } else {
-            alert('Странный вид ответа');
+            alert(data.message ?? 'Не удалось получить список задач.');
         }
     }
 

@@ -4,9 +4,9 @@ namespace App\Controllers\Auth;
 
 use App\Services\Auth\AuthService;
 use App\Services\Auth\IAuthService;
-use Core\Controller\Controller as ControllerController;
+use Core\Controller\Controller;
 
-class BaseController extends ControllerController
+class BaseController extends Controller
 {
     protected IAuthService $authService;
 

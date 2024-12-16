@@ -5,37 +5,47 @@ namespace App\Controllers\Auth;
 use App\Middleware\Auth\Authorisation;
 use App\Models\Auth\UserModel as User;
 use Core\Exceptions\Exception401;
+use Core\Response\ErrorResponse;
+use Core\Response\SuccessResponse;
 
 class AuthController extends BaseController
 {
     public function index()
     {
         if (Authorisation::check_session()) {
-            header('Location: /task');
-            exit;
+            return new SuccessResponse(
+                json_encode(['url' => '/tasks']), 
+                300,
+                'Вы уже авторизованы!'
+            );
         }
         
         $login = trim($_POST['login']) ?? null;
         $password = trim($_POST['password']) ?? null;
 
         if (!$login && !$password) {
-            throw new Exception401();
+            // throw new Exception401();
+            return new ErrorResponse('', 401, 'Неправильный логин или пароль!');
         }
         $user_model = new User($login, $password);
         $user = $this->authService->find($user_model);
+        
+        if (!$user) {
+            return new ErrorResponse('', 401, 'Неправильный логин или пароль!');
+        }
 
         $is_password_valid = password_verify($password, $user['password']);
         if (!$is_password_valid) {
-            throw new Exception401();
+            return new ErrorResponse('', 401, 'Неправильный логин или пароль!');
         }
 
-        if ($user && isset($user['id'])) {
-            $this->authService->auth($user);
-            // TODO: Добавить редирект
-            // return $this->view::render('auth.login');
-            return json_encode(['status' => '200', 'message' => 'Успешная авторизация!']);
+        if (!isset($user['id'])) {
+            return new ErrorResponse('', 401, 'Неправильный логин или пароль!');
         }
 
-        return json_encode(['status' => '401', 'message' => 'Неправильный логин или пароль!']);
+        $this->authService->auth($user);
+        // TODO: Добавить редирект
+        // return $this->view::render('auth.login');
+        return new SuccessResponse('', 300, 'Успешная авторизация!');
     }
 }

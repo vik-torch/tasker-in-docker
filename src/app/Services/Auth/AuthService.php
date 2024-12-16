@@ -44,6 +44,7 @@ class AuthService implements IAuthService
         if ($data && isset($data['id'])) {
             $session_dto = new SessionDTO($data['id']);
             Authorisation::set_session($session_dto);
+            setcookie('auth_id', $session_dto->id, time() + 3600, '/');
         } else {
             throw new ServerException('Ошибка авторизации');
         }

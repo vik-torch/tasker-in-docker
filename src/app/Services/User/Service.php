@@ -37,5 +37,6 @@ class Service implements IUserService
             throw new ClientException('Пользователь с таким email уже зарегистрирован');
         }
 
+        return $user['id'];
     }
 }

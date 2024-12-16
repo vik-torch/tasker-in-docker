@@ -13,6 +13,8 @@ class LogoutController extends BaseController
     public function index()
     {
         Authorisation::end_session();
-        return $this->view::render('auth.login');
+        setcookie('auth_id', '', -1, '/');
+        header('Location: /tasks');
+        return $this->view::render('/tasks/index');
     }
 }

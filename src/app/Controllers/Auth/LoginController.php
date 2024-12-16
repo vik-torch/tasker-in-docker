@@ -9,7 +9,7 @@ class LoginController extends BaseController
     public function index()
     {
         if (Authorisation::check_session()) {
-            // TODO: Добавить редирект на главную
+            header('Location: /tasks');
             return json_encode(['status' => '301', 'message' => 'Вы уже авторизованы! Ща как буудет редирект!!!']);
         }
 
