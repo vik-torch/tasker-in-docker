@@ -6,9 +6,8 @@ try {
     // Загрузка переменных из файла .env
     $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
-    
     // $url = $_SERVER['REQUEST_URI'];
-    $url = $_SERVER['REDIRECT_URL'];
+    $url = $_SERVER['REDIRECT_URL'] ?? $_SERVER['REQUEST_URI'];
     $method = $_SERVER['REQUEST_METHOD'];
 
     // Перенаправление запроса на роуты

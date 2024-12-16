@@ -2,6 +2,7 @@
 
 namespace Core\Database;
 
+use Core\Exceptions\ServerException;
 use \PDO;
 
 class Connector
@@ -30,12 +31,16 @@ class Connector
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ];
         
-        $connection = new PDO(
-            'mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'],
-            $_ENV['DB_USER'],
-            $_ENV['DB_PASS'],
-            $options
-        );
+        try {
+            $connection = new PDO(
+                'mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'],
+                $_ENV['DB_USER'],
+                $_ENV['DB_PASS'],
+                $options
+            );
+        } catch (\PDOException $e) {
+            throw new ServerException('Database connection error: ' . $e->getMessage());
+        }
 
         return $connection;
     }
