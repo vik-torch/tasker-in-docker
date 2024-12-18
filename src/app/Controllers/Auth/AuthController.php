@@ -4,7 +4,6 @@ namespace App\Controllers\Auth;
 
 use App\Middleware\Auth\Authorisation;
 use App\Models\Auth\UserModel as User;
-use Core\Exceptions\Exception401;
 use Core\Response\ErrorResponse;
 use Core\Response\SuccessResponse;
 

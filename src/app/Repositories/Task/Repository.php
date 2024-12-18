@@ -5,9 +5,8 @@ namespace App\Repositories\Task;
 use App\Models\ITaskModel;
 use App\Models\TaskStatus;
 use Core\Database\MySQL\Repository as MySQLRepository;
-use Core\Exceptions\ServerException;
-use Throwable;
 use Core\Database\MySQL\OrderEnum;
+use Throwable;
 
 class Repository extends MySQLRepository implements ITaskRepository
 {

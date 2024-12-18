@@ -3,7 +3,6 @@
 namespace App\Repositories\User;
 
 use App\Models\IUserModel;
-use App\Models\User;
 use Core\Database\MySQL\IRepository;
 
 interface IUserRepository extends IRepository

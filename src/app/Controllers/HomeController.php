@@ -2,10 +2,11 @@
 
 namespace App\Controllers;
 
-class HelloController
+class HomeController
 {
     public function index()
     {
-        return 'Hello, World!';
+        header('Location: /tasks');
+        return ;
     }
 }

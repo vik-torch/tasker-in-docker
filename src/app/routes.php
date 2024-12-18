@@ -5,9 +5,7 @@ use App\Controllers\Auth\LoginController;
 use App\Controllers\Auth\LogoutController;
 use App\Controllers\Auth\RegistrationController;
 use Core\Route\Router;
-use App\Controllers\HelloController;
-use App\Controllers\FirstController;
-use App\Controllers\TestController;
+use App\Controllers\HomeController;
 use App\Controllers\Task\GetController;
 use App\Controllers\Task\StoreController;
 use App\Controllers\Task\UpdateController;
@@ -18,11 +16,7 @@ use App\Controllers\Task\UpdateController;
 
 $router = new Router();
 
-$router->addRoute('GET', '/', HelloController::class, 'index');
-$router->addRoute('GET', '/first', FirstController::class, 'index');
-
-$router->addRoute('GET', '/test', TestController::class, 'index');
-$router->addRoute('GET', '/test/first', TestController::class, 'findFirst');
+$router->addRoute('GET', '/', HomeController::class, 'index');
 
 //////////////////////////////////////////////
 ////////

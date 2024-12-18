@@ -35,7 +35,7 @@ use Core\View\View;
             </div>
             <!-- Sort End -->
 
-            <div id="tasks_list" class="comments_list__wr my-5"></div>
+            <div id="tasks_list" class="tasks_list__wr my-5"></div>
             <h3 class="empty_list_msg d-none my-5">Комментариев пока что нет, будьте первым!</h3>
 
             <!-- Pagination -->
@@ -48,7 +48,7 @@ use Core\View\View;
 
             
             <!-- Task_create form -->
-            <div class="comments_form__wr my-4">
+            <div class="task_form__wr my-4">
                 <h3 class="mb-4">Создать задачу</h3>
                 <form id="task_form">
                     <div class="form-group">

@@ -2,7 +2,7 @@
 
 namespace Core\Database\MySQL;
 
-use \Core\Database\IRepository as IBaseRepository;
+use Core\Database\IRepository as IBaseRepository;
 
 interface IRepository extends IBaseRepository
 {

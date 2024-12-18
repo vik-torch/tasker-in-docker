@@ -2,7 +2,6 @@
 
 namespace App\Services\Auth;
 
-use App\Middleware\Auth\SessionDTO;
 use App\Models\Auth\UserModel;
 
 interface IAuthService

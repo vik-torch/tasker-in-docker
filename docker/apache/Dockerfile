@@ -1,7 +1,6 @@
 FROM php:8.2-apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-RUN apt-get update
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     git \
     zip \
     curl \
@@ -11,7 +10,6 @@ RUN apt-get install -y \
     libbz2-dev \
     libpng-dev \
     libjpeg-dev \
-    libmcrypt-dev \
     libreadline-dev \
     libfreetype6-dev \
     g++
