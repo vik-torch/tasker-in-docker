@@ -12,26 +12,26 @@ services:
             - ./db_data:/usr/data
         ports:
             - 3308:3306
-    web:
-        build:
-            context: .
-            dockerfile: docker/apache/Dockerfile
-            args:
-                uid: ${UID}
-        environment:
-            - APACHE_RUN_USER=#${UID}
-            - APACHE_RUN_GROUP=#${UID}
-        restart: unless-stopped
-        volumes:
-            - ./src:/var/www/html
-            - ./apache_log:/var/log/apache2
-        ports:
-            - 82:80
-            - 9005:9000
-        depends_on:
-            - db
-        links:
-            - db
+    # web:
+    #     build:
+    #         context: .
+    #         dockerfile: docker/apache/Dockerfile
+    #         args:
+    #             uid: ${UID}
+    #     environment:
+    #         - APACHE_RUN_USER=#${UID}
+    #         - APACHE_RUN_GROUP=#${UID}
+    #     restart: unless-stopped
+    #     volumes:
+    #         - ./src:/var/www/html
+    #         - ./apache_log:/var/log/apache2
+    #     ports:
+    #         - 82:80
+    #         - 9005:9000
+    #     depends_on:
+    #         - db
+    #     links:
+    #         - db
     adminer:
         image: adminer
         restart: unless-stopped
