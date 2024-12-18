@@ -1,8 +1,13 @@
 RewriteEngine On
 
+<FilesMatch ".(env|json|log|txt|md|lock|example|gitignore)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
 RewriteCond %{REQUEST_URI} !^/public/ [OR]
 
-RewriteCond %{REQUEST_FILENAME} !-d [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule ^(.*)$ index.php [L]
